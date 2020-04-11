@@ -54,7 +54,7 @@ public:
 	}
 };
 
-class Gamer_Monitor :virtual public Monitor
+class Gamer_Monitor :public Monitor
 {
 protected:
 	int Rate;
@@ -81,42 +81,18 @@ public:
 	}
 };
 
-class TV :virtual public Monitor
+class Smart_TV :public Gamer_Monitor
 {
-protected:
+private:
 	int db;
 
 public:
 	void pprint() {
-		Monitor::pprint();
-		cout << "Макс. громкость, дб: " << db << endl;
-	}
-	
-	void pread() {
-		Monitor::pread();
-		cout << "Макс. громкость, дб: "; scanf("%d", &db);
-	}
-
-	TV() :Monitor()
-	{
-		db = 0;
-	}
-
-	TV(int _id, int _width, int _height, int _db) :Monitor(_id, _width, _height)
-	{
-		db = _db;
-	}
-};
-
-class Smart_TV :public Gamer_Monitor, public TV
-{
-public:
-	virtual void pprint() {
 		Gamer_Monitor::pprint();
 		cout << "Макс. громкость, дб: " << db << endl;
 	}
 
-	virtual void pread() {
+	void pread() {
 		Gamer_Monitor::pread();
 		cout << "Макс. громкость, дб: "; scanf("%d", &db);
 	}
@@ -138,12 +114,12 @@ private:
 	bool big_sound;
 
 public:
-	virtual void pprint() {
+	void pprint() {
 		Smart_TV::pprint();
 		cout << "Объёмный звук (1 - есть, 0 - нет): " << (int)big_sound << endl;
 	}
 
-	virtual void pread() {
+	void pread() {
 		Smart_TV::pread();
 		cout << "Объёмный звук (1 - есть, 0 - нет): "; scanf("%d", &big_sound);
 	}
@@ -361,9 +337,8 @@ int main()
 			cout << "Выберите тип устройства: " << endl
 				<< "1 - Рабочий монитор" << endl
 				<< "2 - Игровой монитор" << endl
-				<< "3 - Телевизор" << endl
-				<< "4 - Smart-TV" << endl
-				<< "5 - Домашний кинотеатр" << endl
+				<< "3 - Smart-TV" << endl
+				<< "4 - Домашний кинотеатр" << endl
 				<< "0 - Отмена" << endl << endl;
 			int chs;
 			scanf("%d", &chs);
@@ -386,17 +361,11 @@ int main()
 			}
 			else if (chs == 3)
 			{
-				TV monik;
-				monik.pread();
-				moniks.push(&monik);
-			}
-			else if (chs == 4)
-			{
 				Smart_TV monik;
 				monik.pread();
 				moniks.push(&monik);
 			}
-			else if (chs == 5)
+			else if (chs == 4)
 			{
 				Big_TV monik;
 				monik.pread();
@@ -442,9 +411,8 @@ int main()
 					cout << "Сравнить как: " << endl
 						<< "1 - Рабочий монитор" << endl
 						<< "2 - Игровой монитор" << endl
-						<< "3 - Телевизор" << endl
-						<< "4 - Smart-TV" << endl
-						<< "5 - Домашний кинотеатр" << endl
+						<< "3 - Smart-TV" << endl
+						<< "4 - Домашний кинотеатр" << endl
 						<< "0 - Отмена" << endl << endl;
 					int chs;
 					scanf("%d", &chs);
@@ -463,13 +431,9 @@ int main()
 					}
 					else if (chs == 3)
 					{
-						moniks.poisk_first("class TV");
-					}
-					else if (chs == 4)
-					{
 						moniks.poisk_first("class Smart_TV");
 					}
-					else if (chs == 5)
+					else if (chs == 4)
 					{
 						moniks.poisk_first("class Big_TV");
 					}
@@ -515,9 +479,8 @@ int main()
 					cout << "Выберите тип: " << endl
 						<< "1 - Рабочий монитор" << endl
 						<< "2 - Игровой монитор" << endl
-						<< "3 - Телевизор" << endl
-						<< "4 - Smart-TV" << endl
-						<< "5 - Домашний кинотеатр" << endl
+						<< "3 - Smart-TV" << endl
+						<< "4 - Домашний кинотеатр" << endl
 						<< "0 - Отмена" << endl << endl;
 					int chs;
 					scanf("%d", &chs);
@@ -536,13 +499,9 @@ int main()
 					}
 					else if (chs == 3)
 					{
-						moniks.poisk_count("class TV");
-					}
-					else if (chs == 4)
-					{
 						moniks.poisk_count("class Smart_TV");
 					}
-					else if (chs == 5)
+					else if (chs == 4)
 					{
 						moniks.poisk_count("class Big_TV");
 					}
