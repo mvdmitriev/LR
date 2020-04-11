@@ -1,3 +1,7 @@
+//try-catch v operacii pop
+//i peregruzke <<
+//v Stec
+
 #include "stdafx.h"
 #include "iostream"
 #include "string"
